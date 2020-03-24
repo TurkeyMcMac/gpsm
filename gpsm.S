@@ -38,6 +38,7 @@ init:
 	lds r17, UDR0
 	mov r18, r17
 	andi r17, 0b01111111
+	clr ZH
 	ldi ZL, port_map
 	add ZL, r17
 	brcc 1f
