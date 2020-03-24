@@ -37,19 +37,13 @@ init:
 	breq .Lpoll
 	lds r17, UDR0
 	mov r18, r17
-	andi r17, 0b01111111
+	andi r17, 0b00011111
 	clr ZH
 	ldi ZL, port_map
 	add ZL, r17
-	brcc 1f
-	inc ZH
-1:	add ZL, r17
-	brcc 1f
-	inc ZH
-1:	add ZL, r17
-	brcc 1f
-	inc ZH
-1:	lpm YL, Z+
+	add ZL, r17
+	add ZL, r17
+	lpm YL, Z+
 	lpm r20, Z
 	ld r21, Y
 	andi r18, 0b10000000
