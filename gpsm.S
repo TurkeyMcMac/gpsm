@@ -15,11 +15,12 @@ init:
 	lpm r17, Z+
 	lpm YL, Z+
 	tst YL
-	breq .Linit_uart
+	breq 2f
 	ld r18, Y
 	or r18, r17
 	st Y, r18
 	rjmp 1b
+2:	clr ZH
 
 .Linit_uart:
 	ldi r17, _UBRRH_VALUE
@@ -38,7 +39,6 @@ init:
 	lds r17, UDR0
 	mov r18, r17
 	andi r17, 0b00011111
-	clr ZH
 	ldi ZL, port_map
 	add ZL, r17
 	add ZL, r17
