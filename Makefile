@@ -2,15 +2,13 @@ elf = gpsm.elf
 flags = -mmcu=$(mcu) -O3 -Wall -Wextra -DF_CPU=$(f-cpu) $(CFLAGS)
 mcu = atmega328p
 partno = m328p
-f-cpu = 16000000UL
+f-cpu = 16000000
 port = /dev/ttyUSB0
-
 programmer = arduino
 
-CC = avr-gcc
-
-$(elf): gpsm.c
-	$(CC) $(flags) -o $(elf) gpsm.c
+$(elf): gpsm.S
+	avr-gcc $(flags) -c -o gpsm.o $<
+	avr-ld -o $@ gpsm.o
 
 .PHONY: upload
 upload: $(elf)
