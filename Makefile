@@ -1,4 +1,3 @@
-elf = gpsm.elf
 flags = -mmcu=$(mcu) -DF_CPU=$(f-cpu) $(CFLAGS)
 mcu = atmega328p
 partno = m328p
@@ -6,19 +5,21 @@ f-cpu = 16000000
 port = /dev/ttyUSB0
 programmer = arduino
 
-$(elf): gpsm.S
-	avr-gcc $(flags) -c -o gpsm.o $<
-	avr-ld -o $@ gpsm.o
-	avr-objcopy -S -Kmain -Kport_map $@
+gpsm.hex: gpsm.o
+	avr-ld -o $@ $<
+	avr-objcopy -O ihex $@
+
+gpsm.o: gpsm.S
+	avr-gcc $(flags) -c -o $@ $<
 
 .PHONY: upload
-upload: $(elf)
-	avrdude -c$(programmer) -p$(partno) -P$(port) -Uflash:w:$(elf):e
+upload: gpsm.hex
+	avrdude -c$(programmer) -p$(partno) -P$(port) -Uflash:w:$<:i
 
 .PHONY: view_asm
-view_asm: $(elf)
-	@avr-objdump -d $(elf) | less
+view_asm: gpsm.o
+	avr-objdump -d $< | less
 
 .PHONY: clean
 clean:
-	$(RM) $(elf)
+	$(RM) gpsm.o
