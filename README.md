@@ -74,3 +74,8 @@ The table mapping numbers to actual pins is at the bottom of `gpsm.S`. The
 number is indicated by an entry's place in the table. The information specified
 is the port register (D, B, etc.) and which bit of the register to use. More
 information is available in `gpsm.S`.
+
+## Why write this in assembly?
+
+Yes, writing it in C would improve understandability. I just wanted to try
+writing something in assembly. This is my first substantial assembly program.
