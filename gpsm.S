@@ -4,6 +4,9 @@
 ; Each structure is three bytes: PORT address, mask, DDR address. The PORT is
 ; PORTD, PORTB, etc. The mask is set to the bit for the particular port. The
 ; mask is zero if the port is reserved. DDR points to DDRD, DDRB, etc.
+;
+; NOTE: RAM addresses throughout this program are assumed to be 0xFF or less.
+; That is why the I/O register addresses in port_map can be stored in one byte.
 
 #define BAUD 9600
 #include <util/setbaud.h>
