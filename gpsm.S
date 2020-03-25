@@ -59,9 +59,9 @@ main:
 .Lpoll:
 	; Check if the flag indicating a byte's available is set:
 	lds r17, UCSR0A
-	andi r17, _BV(RXC0)
+	sbrs r17, RXC0
 	; If it isn't set, poll again:
-	breq .Lpoll
+	rjmp .Lpoll
 	; Load the available byte into r17:
 	lds r17, UDR0
 	; Copy the byte into r18 to later test if the request is for on or off:
@@ -81,8 +81,8 @@ main:
 	; Set r21 to the current value of the port register:
 	ld r21, Y
 	; Check whether the request was to turn the port on or off:
-	andi r18, 0b10000000
-	breq 1f
+	sbrs r18, 7
+	rjmp 1f
 	; If the request was to switch it on, do so:
 	or r21, r20
 	rjmp 2f
