@@ -16,8 +16,9 @@
 
 .section .text
 
-; Set available ports to outputs:
 main:
+; Set available ports to outputs:
+.Lset_ddrs:
 	; Clear Y's high bytes for the duration of the program:
 	clr YH
 	; Set Z to the address of port_map:
