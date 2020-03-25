@@ -8,6 +8,7 @@ programmer = arduino
 gpsm.hex: gpsm.o
 	avr-ld -o $@ $<
 	avr-objcopy -O ihex $@
+	chmod -x $@
 
 gpsm.o: gpsm.S
 	avr-gcc $(flags) -c -o $@ $<
