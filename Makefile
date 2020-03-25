@@ -1,5 +1,5 @@
 elf = gpsm.elf
-flags = -mmcu=$(mcu) -O3 -Wall -Wextra -DF_CPU=$(f-cpu) $(CFLAGS)
+flags = -mmcu=$(mcu) -DF_CPU=$(f-cpu) $(CFLAGS)
 mcu = atmega328p
 partno = m328p
 f-cpu = 16000000
