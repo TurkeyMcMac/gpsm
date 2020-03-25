@@ -5,22 +5,16 @@ f-cpu = 16000000
 port = /dev/ttyUSB0
 programmer = arduino
 
-gpsm.hex: gpsm.o
-	avr-ld -o $@ $<
+gpsm.hex: gpsm.S
+	avr-gcc $(flags) -c -o gpsm.o $<
+	avr-ld -o $@ gpsm.o
 	avr-objcopy -O ihex $@
 	chmod -x $@
-
-gpsm.o: gpsm.S
-	avr-gcc $(flags) -c -o $@ $<
 
 .PHONY: upload
 upload: gpsm.hex
 	avrdude -c$(programmer) -p$(partno) -P$(port) -Uflash:w:$<:i
 
-.PHONY: view_asm
-view_asm: gpsm.o
-	avr-objdump -d $< | less
-
 .PHONY: clean
 clean:
-	$(RM) gpsm.o
+	rm -f gpsm.o
