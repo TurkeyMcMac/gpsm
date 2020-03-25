@@ -23,7 +23,8 @@ make upload port=<device>
 ```
 
 where `<device>` is the name of the serial connection to the USB. The default is
-`/dev/ttyUSB0`.
+`/dev/ttyUSB0`. On a Mac, the device will be named starting with
+`/dev/cu.usbserial-`.
 
 ## Operation
 
@@ -42,14 +43,12 @@ To change the numbering, see **Adapting**.
 
 ### Shell interface
 
-Following is a method to communicate with the AVR using the Unix shell. I
-haven't gotten this working on Mac; the Arduino I'm using doesn't seem to pick
-up all the bytes. I don't know the reason.
+Following is a method to communicate with the AVR using the Unix shell.
 
 ```
 set_pin() { printf \\$(printf %o $(($1+$2*128))); }
 mkfifo usb
-tail -f usb > /dev/ttyUSB0  # Or whatever the USB device is
+tail -f usb > /dev/ttyUSB0  # For Linux; use /dev/cu.usbserial-... on Mac
 set_pin >usb 3 1  # Turns on pin 3
 set_pin >usb 3 0  # Turns off pin 3
 ```
