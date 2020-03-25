@@ -12,7 +12,7 @@ $(elf): gpsm.S
 
 .PHONY: upload
 upload: $(elf)
-	sudo avrdude -c$(programmer) -p$(partno) -P$(port) -Uflash:w:$(elf):e
+	avrdude -c$(programmer) -p$(partno) -P$(port) -Uflash:w:$(elf):e
 
 .PHONY: view_asm
 view_asm: $(elf)
