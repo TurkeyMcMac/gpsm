@@ -9,7 +9,7 @@ programmer = arduino
 $(elf): gpsm.S
 	avr-gcc $(flags) -c -o gpsm.o $<
 	avr-ld -o $@ gpsm.o
-	avr-objcopy -S -Kinit -Kport_map $@
+	avr-objcopy -S -Kmain -Kport_map $@
 
 .PHONY: upload
 upload: $(elf)
