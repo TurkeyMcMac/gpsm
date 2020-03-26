@@ -10,9 +10,6 @@
 
 #define BAUD 9600
 #include <util/setbaud.h>
-; The expressions cannot be evaluated inline, so they are evaluated here:
-.equ _UBRRL_VALUE, UBRRL_VALUE
-.equ _UBRRH_VALUE, UBRRH_VALUE
 
 .section .text
 
@@ -47,9 +44,9 @@ main:
 ; Set up the UART to receive bytes:
 .Linit_uart:
 	; Set the baud rate:
-	ldi r17, _UBRRH_VALUE
+	ldi r17, UBRRH_VALUE
 	sts UBRR0H, r17
-	ldi r17, _UBRRL_VALUE
+	ldi r17, UBRRL_VALUE
 	sts UBRR0L, r17
 	; Set the UART to receive and not transmit:
 	ldi r17, _BV(RXEN0)
