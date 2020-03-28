@@ -16,13 +16,13 @@
 main:
 ; Set available ports to outputs:
 .Lset_ddrs:
-	; Clear Y's high bytes for the duration of the program:
+	; Clear Y and Z high bytes for the duration of the program:
 	clr YH
-	; Set Z to the address of port_map:
 	clr ZH
+	; Set Z to the address of port_map:
 	ldi ZL, port_map
 	; Increment Z to point to the mask field:
-1:	lpm r17, Z+
+1:	inc ZL
 	; Load the mask field into r17:
 	lpm r17, Z+
 	; Load the address of the DDR into Y:
@@ -30,16 +30,13 @@ main:
 	; Check if the address is zero:
 	tst YL
 	; Stop if the address is zero; thats the end of the list:
-	breq 2f
+	breq .Linit_uart
 	; Switch the port to output by ORing the mask into the DDR:
 	ld r18, Y
 	or r18, r17
 	st Y, r18
 	; Repeat until a DDR address of zero is found:
 	rjmp 1b
-	; Clear Z's high byte for the remainder of the program:
-2:	clr ZH
-	; Initialize the UART:
 
 ; Set up the UART to receive bytes:
 .Linit_uart:
