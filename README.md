@@ -48,7 +48,7 @@ Following is a method to communicate with the AVR using the Unix shell.
 ```
 set_pin() { printf \\$(printf %o $(($1+$2*128))); }
 mkfifo usb
-tail -f usb > /dev/ttyUSB0  # For Linux; use /dev/cu.usbserial-... on Mac
+tail -f usb > /dev/ttyUSB0 & # For Linux; use /dev/cu.usbserial-... on Mac
 set_pin >usb 3 1  # Turns on pin 3
 set_pin >usb 3 0  # Turns off pin 3
 ```
