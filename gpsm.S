@@ -105,8 +105,9 @@ port_map:
 	/* port numbers 8-13: */\
 	P(B, 0), P(B, 1), P(B, 2), P(B, 3), P(B, 4), P(B, 5), 0, 0, 0, 0, 0, 0,\
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-	; The zero bytes above pad the size to 32 entries. Zero entries may
-	; clobber the r0 register at address zero, but r0 is never used.
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\
+	/* The zero bytes above pad the size to 32 entries. Zero entries may
+	 * clobber the r0 register at address zero, but r0 is never used. */\
+	/* NUL-terminator just in case all 32 ports are used: */ 0, 0, 0
 #undef R
 #undef P
