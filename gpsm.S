@@ -106,7 +106,10 @@ port_map:
 	/* port numbers 0-7: */\
 	R(D, 0), R(D, 1), P(D, 2), P(D, 3), P(D, 4), P(D, 5), P(D, 6), P(D, 7),\
 	/* port numbers 8-13: */\
-	P(B, 0), P(B, 1), P(B, 2), P(B, 3), P(B, 4), P(B, 5),\
-	/* terminating sequence: */ 0,0,0
+	P(B, 0), P(B, 1), P(B, 2), P(B, 3), P(B, 4), P(B, 5), 0, 0, 0, 0, 0, 0,\
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	; The zero bytes above pad the size to 32 entries. Zero entries may
+	; clobber the r0 register at address zero, but r0 is never used.
 #undef R
 #undef P
