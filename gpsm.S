@@ -84,9 +84,8 @@ main:
 	; If the request was to switch it on, do so:
 	or r21, r20
 	rjmp 2f
-	; If the request was to switch it off, do so (neg + dec = invert bits):
-1:	neg r20
-	dec r20
+	; If the request was to switch it off, do so:
+1:	com r20
 	and r21, r20
 	; Store the new value back in the port register:
 2:	st Y, r21
