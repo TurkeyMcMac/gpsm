@@ -92,7 +92,7 @@ main:
 	; Poll again:
 	rjmp .Lpoll
 
-; The mapping from given port numbers to actual port bits. P(port, bit)
+; The mapping from given port numbers to actual port bits. R(port, bit)
 ; indicates that bit in the given port register is reserved and cannot be
 ; changed. P(port, bit) indicates that the bit is up for changing.
 port_map:
